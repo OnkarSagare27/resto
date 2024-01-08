@@ -14,9 +14,9 @@ class RestaurantModel {
   factory RestaurantModel.fromJson(Map<String, dynamic> json) {
     return RestaurantModel(
       name: json["name"],
-      imageUrl: json["imageUrl"],
-      discount: json["discount"],
-      ratings: json["ratings"],
+      imageUrl: json["primary_image"],
+      discount: json["discount"].toString(),
+      ratings: json["rating"].toString(),
     );
   }
 }

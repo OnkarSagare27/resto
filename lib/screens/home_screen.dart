@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:resto/providers/home_provider.dart';
+import 'package:resto/screens/all_tab.dart';
 import 'package:resto/widgets/search_field.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -18,6 +19,10 @@ class _HomeScreenState extends State<HomeScreen> {
     "Nonveg",
     "Veg",
     "Burger",
+  ];
+
+  List<Widget> tabs = [
+    const AllTab(),
   ];
 
   List<Widget> icons = [
@@ -190,38 +195,102 @@ class _HomeScreenState extends State<HomeScreen> {
                             ],
                           ),
                           child: SearchField(
-                            onChanged: (value) {},
+                            onChanged: (value) =>
+                                homeProviderModel.filterRestos(value),
                             controller: cont,
                           ),
                         ),
                       ),
                     ),
-                    Container(
-                      margin: const EdgeInsets.only(top: 30),
-                      width: double.infinity,
-                      height: 550,
+                    Padding(
+                      padding: EdgeInsets.only(left: 16.w, bottom: 16.h),
+                      child: Row(
+                        children: [
+                          Text(
+                            'Nearby Restaurants',
+                            style: TextStyle(
+                              fontSize: 12.sp,
+                              fontWeight: FontWeight.w600,
+                              color: const Color(0xFF000000),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Expanded(
                       child: PageView.builder(
                         itemCount: icons.length,
                         controller: homeProviderModel.homePageTagController,
                         physics: const NeverScrollableScrollPhysics(),
                         itemBuilder: (context, index) {
-                          return Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              icons[homeProviderModel.currentTabInd],
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              Text(
-                                "${items[homeProviderModel.currentTabInd]} Tab Content",
-                              ),
-                            ],
-                          );
+                          return tabs[0];
                         },
                       ),
                     ),
                   ],
                 ),
+                bottomNavigationBar: BottomNavigationBar(
+                  onTap: (value) =>
+                      homeProviderModel.setCurrentScreenInd(value),
+                  currentIndex: homeProviderModel.currentScreenInd,
+                  selectedLabelStyle: TextStyle(
+                    fontSize: 9.sp,
+                    fontWeight: FontWeight.w600,
+                    color: const Color(0xFFC90000),
+                  ),
+                  fixedColor: const Color(0xFFC90000),
+                  items: [
+                    BottomNavigationBarItem(
+                      icon: Image.asset(
+                        'assets/home.png',
+                        height: 20.h,
+                        width: 20.w,
+                      ),
+                      label: 'Home',
+                    ),
+                    BottomNavigationBarItem(
+                      icon: Image.asset(
+                        'assets/tab_2.png',
+                        height: 24.h,
+                        width: 24.w,
+                      ),
+                      label: 'Explore',
+                    ),
+                    const BottomNavigationBarItem(
+                      icon: SizedBox(),
+                      label: '',
+                    ),
+                    BottomNavigationBarItem(
+                      icon: Image.asset(
+                        'assets/bookmarks.png',
+                        height: 24.h,
+                        width: 24.w,
+                      ),
+                      label: 'Bookmarks',
+                    ),
+                    BottomNavigationBarItem(
+                      icon: Image.asset(
+                        'assets/account.png',
+                        height: 24.h,
+                        width: 24.w,
+                      ),
+                      label: 'Account',
+                    ),
+                  ],
+                ),
+                floatingActionButton: FloatingActionButton(
+                  backgroundColor: const Color(0xFFC90000),
+                  elevation: 0,
+                  shape: const CircleBorder(),
+                  onPressed: () => debugPrint('Pressed'),
+                  child: Image.asset(
+                    'assets/scan.png',
+                    height: 44.h,
+                    width: 44.w,
+                  ),
+                ),
+                floatingActionButtonLocation:
+                    FloatingActionButtonLocation.centerDocked,
               ),
       ),
     );

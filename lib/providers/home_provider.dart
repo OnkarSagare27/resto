@@ -8,11 +8,16 @@ class HomeProvider extends ChangeNotifier {
   LocationModel? _currentLocationModel;
   LocationModel? get currentLocationModel => _currentLocationModel;
 
-  Map<String, dynamic>? _currentRestos;
-  Map<String, dynamic>? get currentRestos => _currentRestos;
+  List<dynamic>? _currentRestos;
+  List<dynamic>? get currentRestos => _currentRestos;
+  List<dynamic>? _allRestos;
+  List<dynamic>? get allRestos => _allRestos;
 
   int _currentTabInd = 1;
   int get currentTabInd => _currentTabInd;
+
+  int _currentScreenInd = 0;
+  int get currentScreenInd => _currentScreenInd;
 
   PageController homePageTagController = PageController();
 
@@ -28,13 +33,35 @@ class HomeProvider extends ChangeNotifier {
   // Fetch current locations restaurants
 
   Future<void> getCurrentLocationRestos() async {
-    Map<String, dynamic> currentRestosTmp = await getRestaurants(
+    List<dynamic> currentRestosTmp = await getRestaurants(
         _currentLocationModel!.lat, _currentLocationModel!.lon);
+
     _currentRestos = currentRestosTmp;
+    _allRestos = currentRestosTmp;
   }
 
   void setCurrentTabInd(int index) {
     _currentTabInd = index;
     notifyListeners();
+  }
+
+  void setCurrentScreenInd(int index) {
+    _currentScreenInd = index;
+    notifyListeners();
+  }
+
+  void filterRestos(String value) {
+    if (value.isEmpty) {
+      _currentRestos = _allRestos;
+      notifyListeners();
+    } else {
+      _currentRestos = _allRestos!
+          .where((restaurant) => restaurant['name']
+              .toString()
+              .toLowerCase()
+              .contains(value.toLowerCase()))
+          .toList();
+      notifyListeners();
+    }
   }
 }

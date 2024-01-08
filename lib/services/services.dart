@@ -46,7 +46,7 @@ Future<LocationModel> getCurrentLocation() async {
   }
 }
 
-Future<Map<String, dynamic>> getRestaurants(double lat, double lng) async {
+Future<List<dynamic>> getRestaurants(double lat, double lng) async {
   const String baseUrl = "https://theoptimiz.com/restro/public/api/";
   const String endpoint = "get_resturants";
   const String apiUrl = "$baseUrl$endpoint";
@@ -66,7 +66,7 @@ Future<Map<String, dynamic>> getRestaurants(double lat, double lng) async {
     );
 
     if (response.statusCode == 200) {
-      final Map<String, dynamic> responseBody = jsonDecode(response.body);
+      final List<dynamic> responseBody = jsonDecode(response.body)['data'];
       return responseBody;
     } else {
       throw Exception("Failed to load data");
