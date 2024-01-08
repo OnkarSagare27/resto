@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:resto/models/restaunrant_model.dart';
 
+// Restaurant Card Widget
+
 class RestaurantCard extends StatelessWidget {
   const RestaurantCard({super.key, required this.restaurantModel});
   final RestaurantModel restaurantModel;

@@ -229,6 +229,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ],
                 ),
+                // Bottom navigation bar
                 bottomNavigationBar: BottomNavigationBar(
                   onTap: (value) =>
                       homeProviderModel.setCurrentScreenInd(value),
