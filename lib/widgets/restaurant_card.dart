@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:resto/models/restaunrant_model.dart';
@@ -21,11 +22,16 @@ class RestaurantCard extends StatelessWidget {
                   topLeft: Radius.circular(11),
                   topRight: Radius.circular(11),
                 ),
-                child: Image.network(
-                  restaurantModel.imageUrl,
-                  fit: BoxFit.cover,
-                  width: 330.w,
+                child: CachedNetworkImage(
                   height: 130.h,
+                  width: 330.w,
+                  fit: BoxFit.cover,
+                  imageUrl: restaurantModel.imageUrl,
+                  placeholder: (context, url) => const Center(
+                      child: CircularProgressIndicator(
+                    color: Color(0xFFFF0000),
+                  )),
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
                 ),
               ),
               Positioned(
