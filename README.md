@@ -2,6 +2,12 @@
 
 - Fetches data from a REST API
 
+## Demo
+
+
+![](https://github.com/OnkarSagare27/resto/blob/master/demo/demo.jpg)
+
+
 ## libs
 
 - **Provider:** State management.
