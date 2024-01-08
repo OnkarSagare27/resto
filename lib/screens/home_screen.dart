@@ -21,29 +21,34 @@ class _HomeScreenState extends State<HomeScreen> {
     "Burger",
   ];
 
-  List<Widget> tabs = [
-    const AllTab(),
-  ];
-
   List<Widget> icons = [
     const Text('All'),
     Image.asset(
       'assets/pizza.png',
       width: 27.w,
+      fit: BoxFit.contain,
     ),
     Image.asset(
       'assets/nonveg.png',
       width: 27.w,
+      fit: BoxFit.contain,
     ),
     Image.asset(
       'assets/veg.png',
       width: 27.w,
+      fit: BoxFit.contain,
     ),
     Image.asset(
       'assets/burger.png',
       width: 27.w,
+      fit: BoxFit.contain,
     ),
   ];
+
+  List<Widget> tabs = [
+    const AllTab(),
+  ];
+
   @override
   void initState() {
     super.initState();

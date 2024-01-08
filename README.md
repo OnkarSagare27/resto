@@ -2,12 +2,6 @@
 
 - Fetches data from a REST API
 
-## Demo
-
-
-https://github.com/OnkarSagare27/weather-app/assets/102476560/ade53192-c176-4676-9d57-b898e4d9451c
-
-
 ## libs
 
 - **Provider:** State management.
